@@ -6,27 +6,17 @@ import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import { v4 as uuid } from "uuid";
+import axios from 'axios';
 
 class App extends Component {
 
     state = {
-        todos: [
-            {
-                id: uuid(),
-                title: 'Take out trash',
-                completed: false
-            },
-            {
-                id: uuid(),
-                title: 'Pay bills',
-                completed: false
-            },
-            {
-                id: uuid(),
-                title: 'Do dishes',
-                completed: false
-            }
-        ]
+        todos: []
+    }
+
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+            .then(res => this.setState({ todos: res.data }))
     }
 
     // Toggle Completed
@@ -48,12 +38,24 @@ class App extends Component {
 
     // Add Todo
     addTodo = (title) => {
-        const newTodo = {
+        // Commented this out to simulate post-request with jsonplaceholder
+        /*const newTodo = {
             id: uuid(),
             title,
             completed: false
-        }
-        this.setState({ todos: [...this.state.todos, newTodo] });
+        }*/
+        axios.post('https://jsonplaceholder.typicode.com/todos', {
+            title,
+            completed: false
+        })
+            .then(res => {
+                res.data.id = uuid();
+                this.setState({
+                    todos: [...this.state.todos, res.data]
+                })
+            })
+
+        // this.setState({ todos: [...this.state.todos, newTodo] });
     }
 
     render() {
