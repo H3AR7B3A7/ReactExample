@@ -1,5 +1,6 @@
 [![Uptime Robot status](https://img.shields.io/uptimerobot/status/m786602102-a9a907a882c742847fb79395?label=Todo%20app&style=for-the-badge)](https://react-first-todo-app.netlify.app/)
 
+# React Todo App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
